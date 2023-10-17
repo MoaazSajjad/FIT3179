@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="choropleth_map.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="choropleth_map.css">
+    <title>VEGALITE</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="center"><i class="fas fa-virus"></i>COVID-19's Impact on Global GDP 2021<i class="fas fa-globe-americas"></i></h1>
+        <p class="intro-description">Dive into a visual journey that showcases the world's economic dynamics pre and post COVID-19. Our <span class="highlighted">global GDP</span> infographic highlights the shifts, challenges, and resilience of economies across the globe.</p>
+        
+        <div class="visualizations">
+    
+            <div class="map-container">
+                <h2 class="center">GDP per Capita: 2021 Snapshot</h2>
+                <div id="choropleth_map"></div>
+                <div class="visualization-description">
+                    Explore the <span class="main-highlight">GDP per capita</span> landscape of 2021. Navigate through the highs and lows, and understand the influence of decisions and events on today's world economy.
+                </div>
+            </div>
+    
+            <h2 class="center">Life Expectancy & Wealth: Before the Pandemic</h2>
+    
+            <div class="scatter-container">
+                <div class="scatter-description">
+                    See how <span class="main-highlight">GDP per capita and life expectancy</span> intertwined in the years leading up to the pandemic. Each dot tells a story of health and wealth, painting a picture of progress and disparity.
+                </div>
+                <div id="bubble_chart"></div>
+            </div>
+    
+            <h2 class="center">GDP per Capita: Continental Overview</h2>
+    
+            <div class="bar-container">
+                <div id="bar_chart"></div>
+                <div class="bar-description">
+                    Examine the <span class="main-highlight">average GDP per Capita</span> by continent in the years before the pandemic. Uncover the economic narratives that define each region, shaped by history and policy.
+                </div>
+            </div>
+    
+            <h2 class="center">GDP & Population: Before the Pandemic</h2>
+    
+            <div class="packed-bubble-container">
+                <div class="packed-bubble-description">
+                    Understand the balance between <span class="main-highlight">GDP and population</span> in the years leading up to the pandemic. Witness how continents fare in economic strength relative to their demographic scale.
+                </div>
+                <div id="packed_bubble_chart"></div>
+            </div>
+    
+            <h2 class="center">The COVID Effect on World GDP</h2>
+    
+            <div class="line-container">
+                <div id="line_chart"></div>
+            </div>
+            <div class="line-description">
+                Track the <span class="main-highlight">global GDP</span> through the 2010s and witness the profound impact of the COVID-19 crisis and the subsequent economic recovery.
+            </div>
+    
+            <footer>
+                <p class="footer-name">Moaaz Sajjad Warraich | FIT3179</p>
+            </footer>
+    
+        </div>
+    </div>              
+    
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 500,
+  "height": 400,
+  "background": "#F5F5F5",
+  "data": {
+    "url": "data/life-expectancy-vs-gdp-per-capita.csv"
+  },
+  "params": [
+    {
+      "name": "Year_Selection",
+      "value": 2010,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2018,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Year >= 2010 && datum.Year <= 2018"},
+    {"filter": "Year_Selection == null || datum.Year == Year_Selection"},
+    {"aggregate": [
+        {"op": "mean", "field": "GDP per capita", "as": "mean_GDP_per_capita"}
+      ],
+      "groupby": ["Region"]},
+      {"filter": "datum.Region !== ''"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Region",
+      "type": "nominal",
+      "title": "Region",
+      "axis": {
+        "tickCount": 7,
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "mean_GDP_per_capita",
+      "type": "quantitative",
+      "title": "Average GDP per Capita",
+      "axis": {"tickCount": 6},
+      "scale": {"domain": [0, 50000]}
+    },
+    "color": {
+      "field": "Region",
+      "type": "nominal",
+      "scale": {
+        "domain": ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+        "range": ["#e41a1c", "#984ea3", "#ff7f00", "#377eb8", "#7EB837",  "#a65628"]
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "opacity": {"value": 0.6},
+        "tooltip": [
+          {"field": "Region", "type": "nominal"},
+          {
+            "field": "mean_GDP_per_capita",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Avg GDP per Capita"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dx": 7,
+        "dy": -2,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "field": "mean_GDP_per_capita",
+          "type": "quantitative",
+          "format": ".0f"
+        }
+      }
+    }
+  ]
+}

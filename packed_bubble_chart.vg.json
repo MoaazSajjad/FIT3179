@@ -1,0 +1,143 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 500,
+  "height": 400,
+  "background": "#F5F5F5",
+  "padding": {"left": 5, "right": 5, "top": 20, "bottom": 0},
+  "autosize": "none",
+  
+  "signals": [
+    {"name": "cx", "update": "width / 2"},
+    {"name": "cy", "update": "height / 2"},
+    {
+      "name": "gravityX",
+      "value": 0.2
+    },
+    {
+      "name": "gravityY",
+      "value": 0.1
+    },
+    {
+      "name": "Year",
+      "value": 2010,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2018,
+        "step": 1
+      }
+    }
+  ],
+  
+  "data": [
+    {
+      "name": "table",
+      "url": "data/life-expectancy-vs-gdp-per-capita.csv",
+      "format": {"type": "csv"},
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.Year == Year"
+        },
+        {
+          "type": "aggregate",
+          "groupby": ["Region"],
+          "fields": ["Population (historical estimates)", "GDP per capita"],
+          "ops": ["sum", "mean"],
+          "as": ["totalPopulation", "avgGDP"]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.Region != null && datum.Region !== ''"
+        }
+      ]
+    }
+  ],
+  
+  "scales": [
+    {
+      "name": "size",
+      "domain": {"data": "table", "field": "totalPopulation"},
+      "range": [4000, 50000]
+    },
+    {
+      "name": "color",
+      "domain": [1000, 50000],
+      "range": ["lightgreen", "darkgreen"]
+    }
+  ],
+  
+  "marks": [
+    {
+      "name": "nodes",
+      "type": "symbol",
+      "from": {"data": "table"},
+      "encode": {
+        "enter": {
+          "fill": {"scale": "color", "field": "avgGDP"},
+          "xfocus": {"signal": "cx"},
+          "yfocus": {"signal": "cy"}
+        },
+        "update": {
+          "size": {"scale": "size", "field": "totalPopulation"},
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 1},
+          "tooltip": {
+            "signal": "{'Population': format(datum.totalPopulation, ','),'Avg GDP': format(datum.avgGDP, '.2f')}"}
+          }
+      },
+      "transform": [
+        {
+          "type": "force",
+          "iterations": 0,
+          "static": false,
+          "forces": [
+            {
+              "force": "collide",
+              "iterations": 0.001,
+              "radius": {"expr": "sqrt(datum.size) / 2 + 5"}
+            },
+            {"force": "center", "x": {"signal": "cx"}, "y": {"signal": "cy"}},
+            {"force": "x", "x": "xfocus", "strength": {"signal": "gravityX"}},
+            {"force": "y", "y": "yfocus", "strength": {"signal": "gravityY"}}
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "from": {"data": "nodes"},
+      "encode": {
+        "enter": {
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fontSize": {"signal": "sqrt(datum.size)/10"},
+          "fontWeight": {"value": "bold"},
+          "fill": {"value": "white"},
+          "text": {"field": "datum.Region"}
+        },
+        "update": {
+          "x": {"field": "x"},
+          "y": {"field": "y"}
+        }
+      }
+    }
+  ],
+  
+  "legends": [
+    {
+      "fill": "color",
+      "title": "Average GDP",
+      "orient": "bottom-left",
+      
+      "encode": {
+        "labels": {
+          "interactive": true,
+          "enter": {
+            "fontSize": {"value": 9}
+          }
+        }
+      }
+    }
+  ]
+}

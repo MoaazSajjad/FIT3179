@@ -1,0 +1,94 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 900,
+    "height": 400,
+    "background": "#F5F5F5",
+    "data": {
+        "url": "data/national-gdp-constant-usd-wb.csv"
+    },
+    "transform": [
+        {"filter": "datum.Entity == 'World'"},
+        {"filter": "datum.Year >= 2011 && datum.Year <= 2021"}
+    ],
+    "encoding": {
+        "x": {
+            "field": "Year",
+            "type": "ordinal",
+            "title": "Year",
+            "axis": {
+                "labelAngle": 0
+            }
+        },
+        "y": {
+            "field": "GDP (constant 2015 US$)",
+            "type": "quantitative",
+            "title": "GDP",
+            "scale": {
+                "domain": [4e13, 9e13]
+            },
+            "axis": {
+                "values": [4e13, 5e13, 6e13, 7e13, 8e13, 9e13],
+                "format": ".0s"
+            }
+        },
+        "tooltip": [
+            {"field": "Year", "type": "ordinal"},
+            {"field": "GDP (constant 2015 US$)", "type": "quantitative", "format": ",", "title": "GDP"}
+        ]
+    },
+    "layer": [
+        {
+            "mark": {
+                "type": "line",
+                "point": {
+                    "filled": true,
+                    "fill": "#333"
+                }
+            }
+        },
+        {
+            "data": {"values": [{"x": "2015", "y": 8.2e13, "text": "Growth Consistency from 2011-2019"}]},
+            "mark": "text",
+            "encoding": {
+                "x": {"field": "x", "type": "ordinal"},
+                "y": {"field": "y", "type": "quantitative"},
+                "text": {"field": "text", "type": "nominal"}
+            }
+        },
+        {
+            "data": {"values": [{"x": "2015", "y": 8.15e13, "y2": 7.5e13}]},
+            "mark": {
+                "type": "rule",
+                "strokeDash": [4, 2],
+                "color": "black"
+            },
+            "encoding": {
+                "x": {"field": "x", "type": "ordinal"},
+                "y": {"field": "y", "type": "quantitative"},
+                "y2": {"field": "y2", "type": "quantitative"}
+            }
+        },
+        {
+            "data": {"values": [{"x": "2020", "y": 7.2e13, "text": "Sudden decrease due to covid-19"}]},
+            "mark": "text",
+            "encoding": {
+                "x": {"field": "x", "type": "ordinal"},
+                "y": {"field": "y", "type": "quantitative"},
+                "text": {"field": "text", "type": "nominal"}
+            }
+        },
+        {
+            "data": {"values": [{"x": "2020", "y": 7.25e13, "y2": 8.2e13}]},
+            "mark": {
+                "type": "rule",
+                "strokeDash": [4, 2],
+                "color": "black"
+            },
+            "encoding": {
+                "x": {"field": "x", "type": "ordinal"},
+                "y": {"field": "y", "type": "quantitative"},
+                "y2": {"field": "y2", "type": "quantitative"}
+            }
+        }
+    ]
+}

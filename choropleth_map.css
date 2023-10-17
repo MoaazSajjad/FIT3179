@@ -1,0 +1,230 @@
+body {
+    background-color:  #fff;
+}
+
+h1 {
+    color: #2a2a2a;
+    font-family: 'Roboto Slab', serif;
+    text-align: center;
+    font-size: 2.5em;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.08);
+    border-bottom: 4px solid #e41a1c;
+    padding-bottom: 12px;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+h1.center i.fas.fa-globe-americas {
+    margin-left: 10px;     
+    font-size: 1.5em;          
+    vertical-align: middle;    
+    color: black;           
+}
+
+h1.center i.fas.fa-virus{
+    margin-right: 10px;
+    font-size: 1.5em;  
+    vertical-align: middle; 
+    color: green;      
+}
+
+
+h2 {
+    color: #333;
+    text-align: center;
+    font-size: 1.3em;
+    text-decoration: underline;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.intro-description {
+    font-size: 1.1em;
+    margin: 20px auto;
+    text-align: center;
+    max-width: 80%;
+    line-height: 1.5;
+}
+
+.highlighted {
+    color: #3366cc;
+    font-weight: bold;
+}
+
+.main-highlight {
+    color: #3366cc;
+    font-weight: bold;
+}
+
+.visualizations {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #F5F5F5;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#choropleth_map {
+    width: 85%; 
+}
+
+.visualization-description {
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 80%; 
+    color: #333;
+    text-align: justify; 
+    border-left: none;
+    padding-left: 0;
+}
+
+
+.map-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 95%;
+    padding: 0 30px;  
+}
+
+.scatter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    padding: 0 30px;
+}
+
+#bubble_chart {
+    flex-basis: 60%;
+    margin-right: 150px;
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+.scatter-description {
+    margin-top: 130px;
+    margin-right: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 400px;
+    color: #333;
+    text-align: justify; 
+    border-right: 2px solid #e41a1c; 
+    padding-right: 15px;
+}
+
+.bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    padding: 0 30px;
+}
+
+.bar-description {
+    margin-top: 200px;
+    margin-left: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 400px;
+    color: #333;
+    text-align: justify; 
+    border-left: 2px solid #e41a1c; 
+    padding-left: 15px;
+}
+
+.line-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 90%;
+    padding: 0 30px;
+    flex-direction: row-reverse;
+}
+
+.line-description {
+    margin-top: 20px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 80%;
+    color: #333;
+    text-align: justify;
+    padding-left: 0;
+}
+
+#line_chart {
+    margin-bottom: 0px;
+    width: 85%;
+    margin-right: 10%; 
+}
+
+
+.bubble-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#bar_chart {
+    flex-basis: 100%;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    width: 60%; 
+    align-self: flex-start;
+}
+
+.packed-bubble-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;  
+    width: 90%;
+    padding: 0 30px;
+}
+
+.packed-bubble-description {
+    margin-top: 150px;
+    margin-right: 200px;
+    font-size: 1.1em;
+    line-height: 1.6;
+    max-width: 400px;
+    color: #333;
+    text-align: justify; 
+    border-right: 2px solid #e41a1c; 
+    padding-right: 15px;
+}
+
+#packed_bubble_chart {
+    flex-basis: 60%;
+    margin-bottom: 20px;
+    width: 60%;
+}
+
+footer {
+    margin-top: 50px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #F5F5F5;
+    border-top: 1px solid #474646;
+}
+
+.footer-name {
+    font-size: 1.1em;
+    color: #333;
+    font-weight: bold;
+    font-style: italic;
+}

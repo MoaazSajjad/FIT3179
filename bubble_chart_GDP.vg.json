@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 450,
+  "background": "#F5F5F5",
+  "data": {
+    "url": "data/life-expectancy-vs-gdp-per-capita.csv"
+  },
+  "params": [
+    {
+      "name": "Year_Filter",
+      "value": 2010,
+      "bind": {
+        "input": "range",
+        "min": 2010,
+        "max": 2018,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    },
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "labels": [
+          "Show All",
+          "North America",
+          "South America",
+          "Europe",
+          "Africa",
+          "Asia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.Year == Year_Filter"},
+    {"filter": "Continent_selection == null || datum.Region == Continent_selection"},
+    {"filter": "datum['GDP per capita'] > 0"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "GDP per capita",
+      "type": "quantitative",
+      "title": "GDP per Capita",
+      "scale": {"domain": [0, 90000]}
+    },
+    "x": {
+      "field": "Life expectancy at birth (historical)",
+      "type": "quantitative",
+      "title": "Life Expectancy at Birth",
+      "scale": {"domain": [50, 90]}
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "circle",
+        "clip": true
+      },
+      "encoding": {
+        "color": {
+          "field": "Region",
+          "type": "nominal",
+          "scale": {
+            "domain": ["North America", "South America", "Europe", "Africa", "Asia", "Oceania"],
+            "range": ["#e41a1c", "#984ea3", "#ff7f00", "#377eb8", "#7EB837", "#a65628"]
+          }
+        },
+        "size": {
+          "field": "Population (historical estimates)",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1500000000],
+            "range": [10, 2000]
+          }
+        },
+        "opacity": {"value": 0.6},
+        "tooltip": [
+          {"field": "Entity", "type": "nominal", "title": "Country"},
+          {"field": "GDP per capita", "type": "quantitative", "format": ","},
+          {"field": "Life expectancy at birth (historical)", 
+          "type": "quantitative",
+          "title": "Life expectancy"},
+          {"field": "Population (historical estimates)", 
+          "type": "quantitative", 
+          "format": ",", 
+          "title": "Population"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+      },
+      "transform": [
+        {
+          "filter": {
+            "field": "Entity",
+            "oneOf": ["Saudi Arabia", "New Zealand", "South Africa", "United States", "Brazil", "Russia", "Kuwait"]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "Life expectancy at birth (historical)",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "GDP per capita",
+          "type": "quantitative"
+        },
+        "text": {"field": "Entity", "type": "nominal"}
+      }
+    }
+  ]
+}
